@@ -9,20 +9,20 @@ import java.util.List;
 
 @Repository
 public class ProductRepository{
-    private int id = 0;
+    private long id = 0;
     private List<Product> productData = new ArrayList<>();
     public Product create(Product product){
-        product.setProductId(Integer.toString(id));
+        product.setProductId(id);
         id += 1;
         productData.add(product);
         return product;
     }
 
-    public Product find(String id){
+    public Product find(Long productId){
         Boolean valid = false;
         Product product = new Product();
         for(int i=0; i < productData.size(); i++){
-            if(productData.get(i).getProductId().equals(id)){
+            if(productData.get(i).getProductId() == productId){
                 product = productData.get(i);
                 productData.remove(i);
                 valid = true;
@@ -36,6 +36,14 @@ public class ProductRepository{
 
     public void save(Product product){
         productData.add(product);
+    }
+
+    public void delete(Long productId){
+        for(int i=0; i < productData.size(); i++){
+            if(productData.get(i).getProductId() == productId){
+                productData.remove(i);
+            }
+        }
     }
 
     public Iterator<Product> findAll(){
