@@ -48,11 +48,4 @@ class HomePageFunctionalTest{
         // Verify
         assertEquals("Welcome", welcomeMessage);
     }
-
-
-
-}
-
-public class HomePageFunctionalTest {
-    
 }
