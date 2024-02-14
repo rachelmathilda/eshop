@@ -29,15 +29,22 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{productId}")
-    public String editProductPage(@PathVariable String productId, Model model){
+    public String editProductPage(@PathVariable Long productId, Model model){
         Product product = service.getProduct(productId);
         model.addAttribute("product", product);
         return "EditProduct";
     }
 
-    @PostMapping("/edit/{productId}")
-    public String updateProduct(@ModelAttribute Product product, Model model){
+    @PutMapping("/edit/{productId}")
+    public String updateProduct(@PathVariable("productId") Long productId, @ModelAttribute Product product){
+        product.setProductId(productId);
         service.updateProduct(product);
+        return "redirect:list";
+    }
+
+    @DeleteMapping("/{productId}")
+    public String deleteProduct(@PathVariable("productId") Long productId){
+        service.deleteProduct(productId);
         return "redirect:list";
     }
     

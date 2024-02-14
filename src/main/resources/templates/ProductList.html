@@ -25,13 +25,33 @@
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
             <td>
-                <a th:href="@{/product/edit/${product.productId}}" class="btn btn-primary btn-sm mb-3">Edit</a>
+                <a th:href="@{/product/edit/${product.productName}}" class="btn btn-primary btn-sm mb-3">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/product/${product.productName}}" class="btn btn-primary btn-sm mb-3">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        $(document).ready(function() {
+        $('#deleteProductButton').click(function() {
+            var productId = $('#productId').text();
+            $.ajax({
+                url: '/products/' + productId,
+                type: 'DELETE',
+                success: function(response) {
+                    alert('Product deleted successfully');
+                    // Redirect to another page or update the UI as needed
+                },
+                error: function(xhr, status, error) {
+                    alert('Error deleting product: ' + error);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
