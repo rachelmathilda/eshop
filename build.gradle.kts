@@ -35,11 +35,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 tasks.register<Test>("unitTest"){
     description = "Runs unit tests."
     group = "verification"
