@@ -41,6 +41,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
+
 tasks.register<Test>("unitTest"){
     description = "Runs unit tests."
     group = "verification"
@@ -51,7 +52,7 @@ tasks.register<Test>("unitTest"){
 }
 
 tasks.register<Test>("functionalTest"){
-    description = "Runs functional test."
+    description = "Runs functional tests."
     group = "verification"
 
     filter{
@@ -67,6 +68,7 @@ tasks.test{
     filter{
         excludeTestsMatching("*FunctionalTest")
     }
+
     finalizedBy(tasks.jacocoTestReport)
 }
 
