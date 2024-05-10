@@ -1,11 +1,34 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class OrderTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+@Builder
+@Getter
+public class Order {
+    String id;
+    List<Product> products;
+    Long orderTime;
+    String author;
+    @Setter
+    String status;
+
+    public Order(String id, List<Products> products, Long orderTime, String author) {
+    }
+
+    public Order(String id, List<Products> products, Long orderTime, String author, String status) {
+    }
+}
+
+class OrderTest {
     private List<Product> products;
     @BeforeEach
     void setUp() {
