@@ -96,7 +96,7 @@ public class OrderRepositoryTest {
             orderRepository.save(order);
         }
 
-        List<Order> orderList = orderRepository.findAllByAuhor(
+        List<Order> orderList = orderRepository.findAllByAuthor(
                 orders.get(1).getAuthor());
         assertEquals(2, orderList.size());
     }

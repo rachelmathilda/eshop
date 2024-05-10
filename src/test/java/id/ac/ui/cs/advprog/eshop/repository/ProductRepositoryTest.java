@@ -23,7 +23,7 @@ class ProductRepositoryTest {
     @Test 
     void testCreateAndFind(){
         Product product = new Product();
-        product.setProductId(78021l);
+        product.setProductId("yo");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
         productRepository.create(product); 
@@ -45,13 +45,13 @@ class ProductRepositoryTest {
     @Test
     void testFindAllIfMoreThanOneProduct(){
         Product product1 = new Product(); 
-        product1.setProductId(78021l);
+        product1.setProductId("yo");
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.create(product1);
         
         Product product2 = new Product(); 
-        product2.setProductId(92614l);
+        product2.setProductId("ya");
         product2.setProductName("Sampo Cap Usep");
         product2.setProductQuantity(50);
         productRepository.create(product2);
