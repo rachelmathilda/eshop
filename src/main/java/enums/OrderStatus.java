@@ -1,0 +1,24 @@
+package enums;
+
+@Getter
+public class OrderStatus {
+    WAITING_PAYMENT("WAITING_PAYMENT"),
+    FAILED("FAILED"),
+    SUCCESS("SUCCESS"),
+    CANCELLED("CANCELLED");
+
+    private final String values;
+
+    private OrderStatus(String value) {
+        this.value = value;
+    }
+
+    public static boolean contains(String param) {
+        for (OrderStatus orderStatus : OrderStatus.values()) {
+            if (orderStatus.name().equals(param)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
