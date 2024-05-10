@@ -9,14 +9,14 @@ class ProductTest{
     @BeforeEach
     void setUp(){
         this.product = new Product();
-        this.product.setProductId(78021l);
+        this.product.setProductId("yo");
         this.product.setProductName("Sampo Cap Bambang");
         this.product.setProductQuantity(100);
     }
 
     @Test
     void testGetProductId(){
-        assertEquals(78021l, this.product.getProductId());
+        assertEquals("yo", this.product.getProductId());
     }
 
     @Test
