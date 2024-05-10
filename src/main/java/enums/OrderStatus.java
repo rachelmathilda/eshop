@@ -1,14 +1,13 @@
 package enums;
 
 @Getter
-public class OrderStatus {
+public enum OrderStatus {
     WAITING_PAYMENT("WAITING_PAYMENT"),
     FAILED("FAILED"),
     SUCCESS("SUCCESS"),
     CANCELLED("CANCELLED");
 
-    private final String values;
-
+    private final String value;
     private OrderStatus(String value) {
         this.value = value;
     }
@@ -20,5 +19,9 @@ public class OrderStatus {
             }
         }
         return false;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
