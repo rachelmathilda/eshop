@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Product {
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -29,7 +29,7 @@ public class Product {
         this.productQuantity = productQuantity;
     }
 
-    private Long productId;
+    private String productId;
     private String productName;
     private int productQuantity;
 }

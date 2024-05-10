@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product getProduct(Long productId){
+    public Product getProduct(String productId){
         Product product = productRepository.find(productId);
         return product;
     }
@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(Long productId){
+    public void deleteProduct(String productId){
         productRepository.delete(productId);
     }
 
