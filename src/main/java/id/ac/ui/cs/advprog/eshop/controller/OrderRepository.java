@@ -12,7 +12,4 @@ public class OrderRepository {
     public Order save(Order order) {return null;}
     public Order findById(String id) {return null;}
     public List<Order> findAllByAuthor(String author) {return null;}
-
-    public List<Order> findAllByAuhor(String author) {
-    }
 }
