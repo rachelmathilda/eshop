@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Builder
@@ -49,24 +47,12 @@ public class Order {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public Long getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Long orderTime) {
-        this.orderTime = orderTime;
-    }
-
     public String getAuthor() {
         return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getStatus() {
