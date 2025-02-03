@@ -19,4 +19,8 @@ public class ProductRepository {
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
+
+    public Product findById(int id){
+        return productData.get(id);
+    }
 }
