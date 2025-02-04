@@ -6,12 +6,14 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product){
+        product.setProductId(generateId());
         productData.add(product);
         return product;
     }
@@ -40,4 +42,31 @@ public class ProductRepository {
         return null;
     }
 
+    public String generateId(){
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        char[] chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+
+        for (int i = 0; i < 8; i++){
+            int randomIndex = random.nextInt(chars.length); // Generates random int within the list size
+            sb.append(chars[randomIndex]);
+        }
+
+        sb.append("-");
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                int randomIndex = random.nextInt(chars.length); // Generates random int within the list size
+                sb.append(chars[randomIndex]);
+            }
+            sb.append("-");
+        }
+
+        for (int i = 0; i < 12; i++) {
+            int randomIndex = random.nextInt(chars.length); // Generates random int within the list size
+            sb.append(chars[randomIndex]);
+        }
+
+        return sb.toString();
+    }
 }
