@@ -69,4 +69,12 @@ public class ProductRepository {
 
         return sb.toString();
     }
+
+    public void delete(String id){
+        for (Product product : productData) {
+            if (product.getProductId().equals(id)){
+                productData.remove(product);
+            }
+        }
+    }
 }
