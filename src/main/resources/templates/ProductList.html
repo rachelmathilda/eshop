@@ -23,7 +23,14 @@
         <tr th:each="product: ${products}">
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
-            <td><a th:href="@{/product/edit/{id}(id=${product.getProductId()})}"><button>Edit</button></a></td>
+            <td>
+                <a th:href="@{/product/edit/{id}(id=${product.productId})}">
+                    <button>Update</button>
+                </a>
+                <a th:href="@{/product/delete/{id}(id=${product.productId})}">
+                    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
