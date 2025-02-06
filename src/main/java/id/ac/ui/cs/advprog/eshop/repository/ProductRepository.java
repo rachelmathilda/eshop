@@ -32,11 +32,10 @@ public class ProductRepository {
     }
 
     public Product update(Product product){
-        for (Product piece : productData) {
-            if (piece.getProductId().equals(product.getProductId())){
-                piece.setProductName(product.getProductName());
-                piece.setProductQuantity(product.getProductQuantity());
-                return piece;
+        for (int i = 0; i < productData.size(); i++) {
+            if (productData.get(i).getProductId().equals(product.getProductId())){
+                productData.set(i, product);
+                return productData.get(i);
             }
         }
         return null;
