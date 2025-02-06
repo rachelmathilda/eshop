@@ -28,5 +28,4 @@ class ProductTest {
     void testGetProductQuantity() {
         assertEquals(100, this.product.getProductQuantity());
     }
-
 }
