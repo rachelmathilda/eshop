@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,22 +39,27 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String editProductPage(@PathVariable String id, Model model) {
-        Product product = service.findById(id);
-
-        if (product == null) {
-            System.out.println("product is null");
+        try {
+            Product product = service.findById(id);
+            model.addAttribute("product", product);
+        }
+        catch (ProductRepository.ProductNotFoundException e) {
+            System.out.println("product not found");
             return "error/ProductNotFound";
         }
-
-        model.addAttribute("product", product);
         return "EditProduct";
     }
 
     @PostMapping("/edit/{id}")
-    public String editProductPost(@PathVariable String id, @ModelAttribute Product product, Model model) {
-        product.setProductId(id);
-        service.update(product);
-        return "redirect:/product/list";
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        try {
+            service.update(product);
+        }
+        catch (ProductRepository.ProductNotFoundException e) {
+            System.out.println("product not found");
+            return "error/ProductNotFound";
+        }
+        return "redirect:list";
     }
 
     @GetMapping("/delete/{id}")
