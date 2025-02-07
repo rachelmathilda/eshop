@@ -33,11 +33,10 @@ public class ProductRepository {
     }
 
     public Product update(Product product){
-        for (Product piece : productData) {
-            if (piece.getProductId().equals(product.getProductId())){
-                piece.setProductName(product.getProductName());
-                piece.setProductQuantity(product.getProductQuantity());
-                return piece;
+        for (int i = 0; i < productData.size(); i++) {
+            if (productData.get(i).getProductId().equals(product.getProductId())){
+                productData.set(i, product);
+                return productData.get(i);
             }
         }
         throw new ProductNotFoundException("Product with ID " + product.getProductId() + " not found.");
@@ -70,10 +69,20 @@ public class ProductRepository {
 
         return sb.toString();
     }
-
+  
     public class ProductNotFoundException extends RuntimeException {
         public ProductNotFoundException(String message) {
             super(message);
+        }
+    }
+  
+    public void delete(Product product){
+        for (int i = 0; i < productData.size(); i++) {
+            Product piece = productData.get(i);
+            if (product.getProductId().equals(piece.getProductId())) {
+                productData.remove(i);
+                return;
+            }
         }
     }
 }

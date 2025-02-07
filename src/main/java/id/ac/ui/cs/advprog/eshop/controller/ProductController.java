@@ -48,7 +48,6 @@ public class ProductController {
             return "error/ProductNotFound";
         }
         return "EditProduct";
-
     }
 
     @PostMapping("/edit/{id}")
@@ -61,5 +60,12 @@ public class ProductController {
             return "error/ProductNotFound";
         }
         return "redirect:list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable String id, @ModelAttribute Product product,  Model model) {
+        product.setProductId(id);
+        service.delete(product);
+        return "redirect:/product/list";
     }
 }
