@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Optional;
 
 @Repository
 public class ProductRepository {
@@ -28,7 +29,7 @@ public class ProductRepository {
                 return product;
             }
         }
-        return null;
+        throw new ProductNotFoundException("Product with ID " + id + " not found.");
     }
 
     public Product update(Product product){
@@ -39,7 +40,7 @@ public class ProductRepository {
                 return piece;
             }
         }
-        return null;
+        throw new ProductNotFoundException("Product with ID " + product.getProductId() + " not found.");
     }
 
     public String generateId(){
@@ -68,5 +69,11 @@ public class ProductRepository {
         }
 
         return sb.toString();
+    }
+
+    public class ProductNotFoundException extends RuntimeException {
+        public ProductNotFoundException(String message) {
+            super(message);
+        }
     }
 }
