@@ -78,9 +78,7 @@ class ProductRepositoryTest {
         updatedProduct.setProductName("Sampo Cap Usep");
         updatedProduct.setProductQuantity(50);
         productRepository.update(updatedProduct);
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertTrue(productIterator.hasNext());
-        Product retrievedProduct = productIterator.next();
+        Product retrievedProduct = productRepository.findById(updatedProduct.getProductId());
 
         assertEquals(updatedProduct.getProductName(), retrievedProduct.getProductName());
         assertEquals(updatedProduct.getProductQuantity(), retrievedProduct.getProductQuantity());
