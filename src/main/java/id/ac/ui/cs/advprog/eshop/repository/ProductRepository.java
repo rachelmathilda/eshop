@@ -14,9 +14,7 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product){
-        if (product.getProductId() == null) {
-            product.setProductId(generateId());
-        }
+        product.setProductId(generateId());
         productData.add(product);
         return product;
     }

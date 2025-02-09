@@ -51,15 +51,16 @@ public class ProductController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editProductPost(@ModelAttribute Product product, Model model) {
+    public String editProductPost(@PathVariable String id, @ModelAttribute Product product, Model model) {
         try {
+            product.setProductId(id);
             service.update(product);
         }
         catch (ProductRepository.ProductNotFoundException e) {
             System.out.println("product not found");
             return "error/ProductNotFound";
         }
-        return "redirect:list";
+        return "redirect:/product/list";
     }
 
     @GetMapping("/delete/{id}")
