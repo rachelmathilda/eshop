@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import id.ac.ui.cs.advprog.eshop.controller.ProductController;
 import org.junit.jupiter.api.Test;
@@ -51,12 +52,18 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("products", products))
                 .andExpect(view().name("ProductList"));
-
-
     }
 
     @Test
-    void testCreateProduct() throws Exception {
+    void testCreateProductPage() throws Exception {
+        mockMvc.perform(get("/product/create"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("CreateProduct"))
+                .andExpect(model().attributeExists("product"));
+    }
+
+    @Test
+    void testCreateProductPost() throws Exception {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
@@ -70,12 +77,33 @@ public class ProductControllerTest {
                 .param("productQuantity", String.valueOf(product.getProductQuantity())))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:list"));
-
-
     }
 
     @Test
-    void testUpdateProduct() throws Exception {
+    void testUpdateProductPage() throws Exception {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        when(productService.findById("eb558e9f-1c39-460e-8860-71af6af63bd6")).thenReturn(product);
+
+        mockMvc.perform(get("/product/edit/{productId}", product.getProductId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("EditProduct"))
+                .andExpect(model().attribute("product", product));
+    }
+
+    @Test
+    void testUpdateProductPage_NotFound() throws Exception {
+        when(productService.findById("notexist-id")).thenThrow(ProductRepository.ProductNotFoundException.class);
+
+        mockMvc.perform(get("/product/edit/notexist-id"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("error/ProductNotFound"));
+    }
+
+    @Test
+    void testUpdateProductPost() throws Exception {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
@@ -95,8 +123,21 @@ public class ProductControllerTest {
                         .param("productQuantity", String.valueOf(updatedProduct.getProductQuantity())))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/product/list"));
+    }
 
+    @Test
+    void testUpdateProductPost_NotFound() throws Exception {
+        Product product = new Product();
+        product.setProductId("notexist-id");
 
+        when(productService.update(any(Product.class))).thenThrow(ProductRepository.ProductNotFoundException.class);
+
+        mockMvc.perform(post("/product/edit/notexist-id")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("productName", "Test Product") //
+                        .param("productQuantity", "10"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("error/ProductNotFound"));
     }
 
     @Test
@@ -109,7 +150,5 @@ public class ProductControllerTest {
         mockMvc.perform(get("/product/delete/{id}", product.getProductId()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/product/list"));
-
-
     }
 }
