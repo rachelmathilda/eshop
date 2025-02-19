@@ -102,4 +102,27 @@ class ProductRepositoryTest {
         productRepository.delete(product);
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFindByProductId_NotFound() {
+        String errorMessage = "Product with ID notexist-id not found.";
+
+        ProductRepository.ProductNotFoundException thrown = assertThrows(ProductRepository.ProductNotFoundException.class, () -> {
+            productRepository.findById("notexist-id");
+        });
+
+        assertEquals(errorMessage, thrown.getMessage());
+    }
+
+    @Test
+    void testUpdate_NotFound() {
+        Product product = new Product();
+        String errorMessage = "Product with ID " + product.getProductId() + " not found.";
+
+        ProductRepository.ProductNotFoundException thrown = assertThrows(ProductRepository.ProductNotFoundException.class, () -> {
+            productRepository.update(product);
+        });
+
+        assertEquals(errorMessage, thrown.getMessage());
+    }
 }
