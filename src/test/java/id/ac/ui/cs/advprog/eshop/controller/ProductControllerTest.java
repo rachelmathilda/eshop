@@ -89,13 +89,12 @@ public class ProductControllerTest {
         when(productService.findById(product.getProductId())).thenReturn(product);
         when(productService.update(any(Product.class))).thenReturn(updatedProduct);
 
-        mockMvc.perform(post("/product/update/{productId}", product.getProductId())
+        mockMvc.perform(post("/product/edit/{productId}", product.getProductId())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("productId", product.getProductId())
                         .param("productName", updatedProduct.getProductName())
                         .param("productQuantity", String.valueOf(updatedProduct.getProductQuantity())))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("EditProduct"));
+                .andExpect(redirectedUrl("/product/list"));
 
 
     }
