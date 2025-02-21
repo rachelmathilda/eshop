@@ -36,10 +36,10 @@ jobs:
         run: |
           curl -L https://bin.koyeb.com/install.sh | bash
           koyeb login --token ${{ secrets.KOYEB_TOKEN }}
-          koyeb deploy example-java \
+          koyeb deploy eshop \
             --git github.com/rachelmathilda/eshop \
             --git-branch main \
-            --git-run-command "java -jar target/example-java-1.0-SNAPSHOT.jar"
+            --git-run-command "java -jar target/eshop-1.0-SNAPSHOT.jar"
             --ports 3000:http \
             --routes /:3000 \
             --image ${{ secrets.DOCKER_USERNAME }}/advshop:latest
