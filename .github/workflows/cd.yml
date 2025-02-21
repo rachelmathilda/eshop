@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/advshop:latest
+          tags: rachelmathilda14/advshop:latest
 
       - name: Deploy to Koyeb
         run: |
@@ -42,6 +42,6 @@ jobs:
             --git-run-command "java -jar target/eshop-1.0-SNAPSHOT.jar"
             --ports 3000:http \
             --routes /:3000 \
-            --image ${{ secrets.DOCKER_USERNAME }}/advshop:latest
+            --image rachelmathilda14/advshop:latest
         env:
           KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
