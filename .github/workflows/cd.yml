@@ -35,7 +35,6 @@ jobs:
 
       - name: Deploy to Koyeb
         run: |
-          curl -L https://bin.koyeb.com/install.sh | bash
           koyeb login --token ${{ secrets.KOYEB_TOKEN }}
           koyeb deploy eshop \
             --git github.com/rachelmathilda/eshop \
