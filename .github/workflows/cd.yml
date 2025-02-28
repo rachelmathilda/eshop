@@ -36,11 +36,9 @@ jobs:
       - name: Deploy to Koyeb
         run: |
           koyeb login --token ${{ secrets.KOYEB_TOKEN }}
-          koyeb deploy eshop \
-            --git github.com/rachelmathilda/eshop \
-            --git-branch master \
+          koyeb app init eshop \
+            --docker advshop:latest \
             --ports 8080:http \
             --routes /:8080 \
-            --image rachelmathilda14/advshop:latest
         env:
           KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
