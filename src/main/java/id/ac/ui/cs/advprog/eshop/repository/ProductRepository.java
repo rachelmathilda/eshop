@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.Optional;
 
 @Repository
 public class ProductRepository {
@@ -38,7 +37,7 @@ public class ProductRepository {
         for (int i = 0; i < productData.size(); i++) {
             if (productData.get(i).getProductId().equals(product.getProductId())){
                 productData.set(i, product);
-                return productData.get(i);
+                return product;
             }
         }
         throw new ProductNotFoundException("Product with ID " + product.getProductId() + " not found.");

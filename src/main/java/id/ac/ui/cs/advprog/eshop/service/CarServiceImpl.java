@@ -12,9 +12,12 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarRepository carRepository;
 
+    public CarServiceImpl() {
+        super();
+    }
+
     @Override
     public Car create(Car car) {
-        // TODO
         carRepository.create(car);
         return car;
     }
@@ -35,13 +38,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void update(String carId, Car car) {
-        // TODO
         carRepository.update(carId, car);
     }
 
+
     @Override
-    public void deleteCarById(String carId) {
-        // TODO
+    public void delete(String carId) {
         carRepository.delete(carId);
     }
 }
