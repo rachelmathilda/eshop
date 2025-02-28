@@ -52,7 +52,7 @@ public class CarController{
 
     @PostMapping("/deleteCar")
     public String deleteCar(@RequestParam("carId") String carId) {
-        carservice.deleteCarById(carId);
+        carservice.delete(carId);
         return "redirect:/car/listCar";
     }
 }
