@@ -1,9 +1,22 @@
-## Modul 2
+## Modul 3
 ### Refleksi
 
-1. tidak berhasil mengintegrasikan sonarcloud untuk menganalisis repo(the main branch of this project is empty)
-2. kode sudah mengimplementasikan definisi continuous integration dan continuous deployment. alasannya: 
-   1. workflow ci berfungsi untuk integrasi dan pengujian saja. mulai dari checkout kode, pengaturan toolchain java, dan menjalankan unit test
-   2. workflow cd sudah mengotomatiskan proses deployment yaitu login docker, build dan push image docker, lalu deploy ke koyeb
-   3. ci dan cd tidak tercampur. sudah dihandle di masing-masing workflow. selain itu terdapat tambahan workflow untuk analisis apakah kode sudah maintanable atau belum
-   4. tiap workflow automatis dijalankan ketika push atau pull request sehingga ketika diperbarui langsung diintegrasi dan di deploy. 
+1. prinsip yang diterapkan: 
+   - SRP (Single Responsibility Principle): suatu class harus memiliki 1 fungsi saja
+     CarController dipisah dengan ProductController, begitu juga dengan CarRepository, CarService, dan CarServiceImpl yang dibuat berbeda dengan yang dimiliki product. 
+   - OCP (Open-Closed Principle): terbuka untuk ekstensi tetapi tertutup untuk di modifikasi
+     
+   - LSP (Liskov Substitution Principle): object di superclass harus bisa di gantikan dengan objek di subclass
+     
+   - ISP (Interface Segregation Principle): interface yang besar harus di pecah jadi lebih spesifik dan memiliki method yang relevan
+     
+   - DIP (Dependency Inversion Principle): suatu kelas bergantung ke interface atau abstract class dibanding concrete class dan fungsi (yang high-level gaboleh bergantung ke yang low-level)
+     sebelumnya CarController bergantung pada kelas ProductController namun dipisah dan dibuat menjadi kelas yang tidak dependent dengan kelas yang setingkat atau lebih rendah. 
+ 
+2. kelebihan menggunakan prinsip-prinsip SOLID ke proyek:
+   
+
+
+3. kekurangan jika tidak menggunakan prinsip-prinsip SOLID: 
+   
+

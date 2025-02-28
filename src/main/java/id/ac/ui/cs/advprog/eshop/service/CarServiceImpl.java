@@ -12,9 +12,14 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarRepository carRepository;
 
+    public CarServiceImpl() {
+        super();
+    }
+
     @Override
     public Car create(Car car) {
         // TODO
+
         carRepository.create(car);
         return car;
     }
