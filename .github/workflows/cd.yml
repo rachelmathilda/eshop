@@ -39,10 +39,9 @@ jobs:
           koyeb login --token ${{ secrets.KOYEB_TOKEN }}
           koyeb deploy eshop \
             --git github.com/rachelmathilda/eshop \
-            --git-branch main \
-            --git-run-command "java -jar target/eshop-1.0-SNAPSHOT.jar"
-            --ports 3000:http \
-            --routes /:3000 \
+            --git-branch master \
+            --ports 8080:http \
+            --routes /:8080 \
             --image rachelmathilda14/advshop:latest
         env:
           KOYEB_TOKEN: ${{ secrets.KOYEB_TOKEN }}
