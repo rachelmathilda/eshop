@@ -36,7 +36,7 @@ jobs:
       - name: Deploy to Koyeb
         run: |
           koyeb login --token ${{ secrets.KOYEB_TOKEN }}
-          koyeb app init eshop \
+          koyeb deploy eshop \
             --docker advshop:latest \
             --ports 8080:http \
             --routes /:8080 \
