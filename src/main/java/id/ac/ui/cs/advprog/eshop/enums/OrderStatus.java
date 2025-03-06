@@ -8,7 +8,7 @@ public enum OrderStatus {
 
     private final String value;
     private OrderStatus(String value) {
-        this.value 
+        this.value=value;
     }
 
     public static boolean contains(String param) {
