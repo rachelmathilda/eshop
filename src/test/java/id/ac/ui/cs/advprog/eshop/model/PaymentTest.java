@@ -34,25 +34,16 @@ class PaymentTest {
     }
 
     @Test
-    void testCreatePaymentEmptyOrder() {
-        this.orders.clear();
-        Map<String, String> paymentData = new HashMap<>();
-        assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(order, "voucherCode");
-        });
-    }
-
-    @Test
     void testCreatePaymentNoStatus(){
-        Payment payment = new Payment(order, "voucherCode");
-        assertSame(this.order, payment.getOrder());
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode");
+        assertEquals("13652556-012a-4c07-b546-54eb1396d79b", payment.getId());
         assertEquals("voucherCode", payment.getMethod());
     }
 
     @Test
     void testCreatePaymentSuccessStatus(){
-        Payment payment = new Payment(order, "voucherCode", "SUCCESS");
-        assertSame(this.order, payment.getOrder());
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "SUCCESS");
+        assertEquals("13652556-012a-4c07-b546-54eb1396d79b", payment.getId());
         assertEquals("voucherCode", payment.getMethod());
         assertEquals("SUCCESS", payment.getStatus());
     }
@@ -60,20 +51,20 @@ class PaymentTest {
     @Test
     void testCreatePaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(order, "voucherCode", "INVALID");
+            Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "INVALID");
         });
     }
 
     @Test
     void testSetStatusToRejected() {
-        Payment payment = new Payment(order, "voucherCode", "SUCCESS");
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "SUCCESS");
         payment.setStatus("REJECTED");
         assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
     void testSetStatusToInvalidStatus() {
-        Payment payment = new Payment(order, "voucherCode", "SUCCESS");
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "SUCCESS");
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("INVALID"));
     }
 }
