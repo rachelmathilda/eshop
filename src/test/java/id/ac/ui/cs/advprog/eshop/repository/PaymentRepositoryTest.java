@@ -16,12 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class PaymentRepositoryTest {
     PaymentRepository paymentRepository;
+    OrderRepository orderRepository;
     List<Order> orders;
     List<Payment> payments;
 
     @BeforeEach
     void setUp() {
         orderRepository = new OrderRepository();
+        paymentRepository = new PaymentRepository();
 
         List<Product> products = new ArrayList<>();
         Product product1 = new Product();
@@ -53,7 +55,7 @@ class PaymentRepositoryTest {
         Payment payment = payments.get(1);
         Payment result = paymentRepository.save(payment);
 
-        Order findResult = paymentRepository.findById(payments.get(1).getId());
+        Payment findResult = paymentRepository.findById(payments.get(1).getId());
         assertEquals(payment.getId(), result.getId());
         assertEquals(payment.getId(), findResult.getId());
     }
