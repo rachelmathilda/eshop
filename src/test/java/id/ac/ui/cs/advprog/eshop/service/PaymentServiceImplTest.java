@@ -82,15 +82,19 @@ class PaymentServiceImplTest {
     @Test
     void testAddPaymentMoreThanOne() {
         Map<String, String> map = new HashMap<String, String>();
+        map.put("voucherCode", "ESHOP9876XYZ1234");
         Payment payment1 = new Payment("g197ru40-2c48-7hd3-1b64-0nc85fbcf9e1", PaymentStatus.REJECTED.getValue());
         Order order1 = orders.getFirst();
         doReturn(payment1).when(paymentRepository).save(payment1);
         paymentService.addPayment(order1, "voucher", map);
 
+        Map<String, String> map2 = new HashMap<String, String>();
+        map2.put("address", "depok");      // Delivery address
+        map2.put("deliveryFee", "12.000");
         Payment payment2 = new Payment("js1396af-d79b-e5f6-c3d4-56789abcdef0", PaymentStatus.REJECTED.getValue());
         Order order2 = orders.get(1);
         doReturn(payment2).when(paymentRepository).save(payment2);
-        paymentService.addPayment(order2, "cod", map);
+        paymentService.addPayment(order2, "cod", map2);
 
         doReturn(payments).when(paymentRepository).findAll();
         List<Payment> resultPayments = paymentService.getAllPayments();

@@ -17,7 +17,6 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment addPayment(Order order, String method, Map<String, String> paymentData){
         Payment payment = new Payment(order.getId());
-        setStatus(payment, "SUCCESS");
         if(method.equals("voucher") ){
             if(paymentData.containsKey("voucherCode")){
                 String voucherCode = paymentData.get("voucherCode");
@@ -25,6 +24,7 @@ public class PaymentServiceImpl implements PaymentService {
                         voucherCode.startsWith("ESHOP") &&
                         voucherCode.chars().filter(Character::isDigit).count() == 8){
                     setStatus(payment, "SUCCESS");
+                    payment.setPaymentData(paymentData);
                 } else {
                     setStatus(payment, "REJECTED");
                 }
@@ -39,7 +39,6 @@ public class PaymentServiceImpl implements PaymentService {
                         deliveryFee != null && !deliveryFee.isEmpty()) {
                     setStatus(payment, "SUCCESS");
                     payment.setPaymentData(paymentData);
-                    setStatus(payment, "SUCCESS");
                 } else {
                     setStatus(payment, "REJECTED");
                 }
@@ -48,7 +47,6 @@ public class PaymentServiceImpl implements PaymentService {
             }
 
         }
-        payment.setPaymentData(paymentData);
         return payment;
     }
 

@@ -4,7 +4,6 @@ import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Map;
