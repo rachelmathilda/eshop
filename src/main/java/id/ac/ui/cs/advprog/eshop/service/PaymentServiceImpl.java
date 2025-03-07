@@ -18,6 +18,23 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment addPayment(Order order, String method, Map<String, String> paymentData){
         Payment payment = new Payment(order.getId());
         setStatus(payment, "SUCCESS");
+        if(method.equals("voucher") ){
+            if(paymentData.containsKey("voucherCode"){
+                String voucherCode = paymentData.get("voucherCode");
+                if (voucherCode.length() == 16 &&
+                        voucherCode.startsWith("ESHOP") &&
+                        voucherCode.chars().filter(Character::isDigit).count() == 8){
+                    setStatus(payment, "SUCCESS");
+                } else {
+                    setStatus(payment, "REJECTED");
+                }
+            } else {
+                setStatus(payment, "REJECTED");
+            }
+        } else if (method.equals("cod")) {
+
+        }
+        payment.setPaymentData(paymentData);
         return payment;
     }
 
