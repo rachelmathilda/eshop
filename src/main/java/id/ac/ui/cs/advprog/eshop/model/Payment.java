@@ -14,12 +14,16 @@ public class Payment {
     String status;
     Map<String, String> paymentData;
 
-    public Payment(String id, String method) {
+    public Payment(String id) {
         this.id = id;
-        this.method = method;
     }
 
-    public Payment(String id, String method, String status) {
+    public Payment(String id, String status) {
+        this.id = id;
+        setStatus(status);
+    }
+
+    public Payment(String id, String status, String method) {
         this.id = id;
         this.method = method;
         setStatus(status);

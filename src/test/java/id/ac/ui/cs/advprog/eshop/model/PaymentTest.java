@@ -36,36 +36,34 @@ class PaymentTest {
 
     @Test
     void testCreatePaymentNoStatus(){
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode");
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         assertEquals("13652556-012a-4c07-b546-54eb1396d79b", payment.getId());
-        assertEquals("voucherCode", payment.getMethod());
     }
 
     @Test
     void testCreatePaymentSuccessStatus(){
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", PaymentStatus.SUCCESS.getValue());
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", PaymentStatus.SUCCESS.getValue());
         assertEquals("13652556-012a-4c07-b546-54eb1396d79b", payment.getId());
-        assertEquals("voucherCode", payment.getMethod());
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
     void testCreatePaymentInvalidStatus() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "INVALID");
+            Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "INVALID");
         });
     }
 
     @Test
     void testSetStatusToRejected() {
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", "SUCCESS");
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b","SUCCESS");
         payment.setStatus(PaymentStatus.REJECTED.getValue());
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
     void testSetStatusToInvalidStatus() {
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b", "voucherCode", PaymentStatus.SUCCESS.getValue());
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",  PaymentStatus.SUCCESS.getValue());
         assertThrows(IllegalArgumentException.class, () -> order.setStatus("INVALID"));
     }
 }
